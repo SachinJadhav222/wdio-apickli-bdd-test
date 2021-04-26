@@ -17,6 +17,7 @@ Given("I visit {string}", async function(URL)  {
 Then("I entered {string} at {string}", (expectedValue, selector) => {
   //console.log('Platform=============>>>>>>>>>>>>>',process.platform)
   browser.$(locators[selector]).setValue(expectedValue);
+ 
 });
 Then("I click on {string}", (selector) => {
   browser.$(locators[selector]).click();
@@ -26,6 +27,7 @@ Then("I shloud see Page title {string}", (expectedValue) => {
   // browser.getTitle().then((readValue)=>{
   // 	expect(readValue).to.contain(expectedValue)
   // })
+  browser.saveScreenshot('reports/ui/2.png')
   assert.equal(browser.getTitle(), expectedValue);
   //expect(browser.getTitle()).to.contain(expectedValue);
 });

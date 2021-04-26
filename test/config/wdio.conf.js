@@ -221,8 +221,19 @@ exports.config = {
     /**
      * Runs after a Cucumber scenario
      */
-    // afterScenario: function (uri, feature, scenario, result, sourceLocation) {
-    // },
+    afterScenario: function (uri, feature, scenario, result, sourceLocation) {
+        console.log('This is after scenario-----> ',uri,feature.name,scenario.name,result.status)
+        var me = this;
+        console.log('Taking screenshot---->>>>')
+        if (result.status === 'passed' ) {
+           browser.saveScreenshot('reports/ui/222.png')
+            // return browser.takeScreenshot().then(function(screenshot) {
+            //     return me.attach(screenshot, "image/png");
+            //}
+           // );
+        }
+
+    },
     /**
      * Runs after a Cucumber feature
      */
