@@ -4,40 +4,27 @@ const yamlMerge = require("yaml-merge");
 const glob = require("glob");
 const filePath = "test/locators/*.yaml";
 
-let objYaml = null;
-let objData = null;
+//let objYaml = null;
+//let objData = null;
 
-// function getSelecotr1(selector) {
-//   let webElement = null;
+// const getSelecotr = function () {
+//   glob(filePath, function (er, files) {
+//     // objYaml = yamlMerge.mergeFiles(files);
 
-//   if (objYaml === null) {
-//     glob(filePath, function (er, files) {
-//       try {
-//         objYaml = yamlMerge.mergeFiles(files);
-//         // console.log('Merged Object---->',objYaml)
-//         return objYaml[selector];
-//         //console.log(webElement)
-//         // return webElement;
-//       } catch (er) {
-//         console.log("Catch block--------->", er);
-//       }
-//     });
-//   }
-// }
-const getLoc= async (selector)=>{
-    glob(filePath, async function (er, files) {
-        objYaml = await yamlMerge.mergeFiles(files);
-        //console.log(objYaml);
-        return await objYaml[selector];
-      });
-}
-function getSelecotr1(selector) {
-  glob(filePath, async function (er, files) {
-    objYaml = await yamlMerge.mergeFiles(files);
-    //console.log(objYaml);
-    //return await objYaml[selector];
+//     return yamlMerge.mergeFiles(files);
+//   });
+// };
+
+// console.log(getSelecotr());
+
+function getSelector(callback) {
+  glob(filePath, function (er, files) {
+    // objYaml = yamlMerge.mergeFiles(files);
+
+    return callback(yamlMerge.mergeFiles(files));
   });
 }
 
-console.log(getSelecotr1("loc_phoneNumber"));
-console.log(getLoc("loc_phoneNumber"));
+getSelector(function (res) {
+  console.log(res["loc_lastName"]);
+});
